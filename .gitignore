@@ -1,0 +1,11 @@
+# CMake files
+*CMakeCache*
+*CMakeFiles*
+*Makefile
+*cmake_install*
+
+# Other files
+*sublime-workspace
+
+# Generated files
+*rscdata.c

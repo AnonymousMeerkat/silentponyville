@@ -6,6 +6,8 @@ add_custom_command(
 
 set(SOURCES
     rscdata.c
+    Globals.c
+    entity/Player.c
     main.c
 )
 

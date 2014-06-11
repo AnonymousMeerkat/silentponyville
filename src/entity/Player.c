@@ -16,7 +16,7 @@ void Player_destroy(NEntity* player) {
 void Player_control(NEntity* player) {
 #define check(dir) \
     bool dir##_down = false;\
-    for (int i = 0; SP_##dir##_keys[i] && !(dir##_down = N_key_states[(int)SP_##dir##_keys[i]]); i++);
+    for (short i = 0; SP_##dir##_keys[i] && !(dir##_down = N_key_states[(int)SP_##dir##_keys[i]]); i++);
 
     check(left);
     check(right);

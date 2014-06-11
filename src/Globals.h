@@ -15,9 +15,9 @@ void Globals_destroy();
 
 // Input
 
-extern int* SP_left_keys;
-extern int* SP_right_keys;
-extern int* SP_run_keys;
+extern short* SP_left_keys;
+extern short* SP_right_keys;
+extern short* SP_run_keys;
 
 END_HEAD
 

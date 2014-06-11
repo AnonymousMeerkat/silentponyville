@@ -3,10 +3,10 @@
 #include <Nightmare.h>
 
 #define genkeys(type, ...)\
-int _SP_##type##_keys[] = {\
+short _SP_##type##_keys[] = {\
     __VA_ARGS__, 0\
 };\
-int* SP_##type##_keys = _SP_##type##_keys;
+short* SP_##type##_keys = _SP_##type##_keys;
 
 genkeys(left, 'a', 'h', 'z', 37);
 genkeys(right, 'd', 'l', 'c', 39);

@@ -33,6 +33,10 @@ void Game_destroy() {
 }
 
 void Game_loop() {
+    if (N_key_states[27]) {
+        N_running = false;
+        return;
+    }
     NImage* fbo = fbo1;
     NImage* otherfbo = fbo2;
     if (yesno) {

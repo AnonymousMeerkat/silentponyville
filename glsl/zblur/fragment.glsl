@@ -5,9 +5,17 @@ in vec2 pos;
 out vec4 out_color;
 uniform sampler2D texsampler;
 uniform float N_alpha;
+uniform int N_time;
+uniform int N_rand;
 
 const float sampleDist = 0.3;
 const float sampleStrength = 7.2;
+
+float rand(vec2 n)
+{
+  return 0.5 + 0.5 *
+     fract(sin(dot(vec2(mod(N_rand, n.x), mod(N_rand, n.y)), vec2(12.9898, 78.233)))* (43758.5453));
+}
 
 void main() {
     // some sample positions
@@ -53,4 +61,10 @@ void main() {
     t = 1 - dist*2;
     t = smoothstep(.7,0,dist);
     out_color *= vec4(t, t, t, N_alpha);
+
+    float x = rand(UV);
+    vec4 grain = vec4(mod((mod(x, 13) + 1) * (mod(x, 123) + 1), 0.01)-0.005) * 16;
+    //vec4 grain = vec4(mod((mod(x, 13) + 1) * (mod(x, 123) + 1), 0.01));
+
+    out_color += grain;
 }

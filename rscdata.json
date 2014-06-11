@@ -1,4 +1,5 @@
 {
+    "title": "Silent Ponyville (IN-DEV)",
     "shaders": [
         [
             "image",
@@ -6,9 +7,18 @@
                 [0, "Nvertex_pos"],
                 [1, "Nvertex_UV"]
             ]
+        ],
+        [
+            "zblur",
+            [
+                [0, "Nvertex_pos"],
+                [1, "Nvertex_UV"]
+            ]
         ]
     ],
     "images": [
+        "FAKELEVEL.png",
+        "FAKEFOG.png"
     ],
     "sprites": [
         [

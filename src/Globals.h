@@ -10,6 +10,9 @@ void Globals_destroy();
 
 #define SP_SPRITESHEET_PLAYER 0
 
+#define SP_IMAGE_FAKELEVEL 0
+#define SP_IMAGE_FAKEFOG 1
+
 // Input
 
 extern int* SP_left_keys;

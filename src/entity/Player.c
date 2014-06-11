@@ -13,7 +13,6 @@ void Player_destroy(NEntity* player) {
     NEntity_destroy(player);
 }
 
-
 void Player_control(NEntity* player) {
 #define check(dir) \
     bool dir##_down = false;\

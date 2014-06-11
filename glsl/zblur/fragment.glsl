@@ -67,4 +67,6 @@ void main() {
     //vec4 grain = vec4(mod((mod(x, 13) + 1) * (mod(x, 123) + 1), 0.01));
 
     out_color += grain;
+
+    out_color -= rand(vec2(N_rand, N_time)) * 0.1;
 }

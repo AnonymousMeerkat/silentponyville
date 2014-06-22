@@ -8,16 +8,15 @@ short _SP_##type##_keys[] = {\
 };\
 short* SP_##type##_keys = _SP_##type##_keys;
 
-genkeys(left, 'a', 'h', 'z', 37);
-genkeys(right, 'd', 'l', 'c', 39);
-genkeys(run, 16, 16);
+genkeys(left, 'A', 'H', 'Z', 37);
+genkeys(right, 'D', 'L', 'C', 39);
+genkeys(run, 16);
 
 
 void Globals_init() {
     SP_left_keys[3] = N_WMan.left_key;
     SP_right_keys[3] = N_WMan.right_key;
-    SP_run_keys[0] = N_WMan.lshift_key;
-    SP_run_keys[1] = N_WMan.rshift_key;
+    SP_run_keys[0] = N_WMan.shift_key;
 }
 
 void Globals_destroy() {

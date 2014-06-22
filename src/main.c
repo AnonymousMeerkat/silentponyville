@@ -28,6 +28,9 @@ void Game_init() {
 
 void Game_destroy() {
     Ndebug("Destroying!");
+    NImage_destroy(fbo2);
+    NImage_destroy(swapfbo);
+    NImage_destroy(fbo1);
     Player_destroy(player);
     Globals_destroy();
 }
@@ -53,13 +56,13 @@ void Game_loop() {
     NEntity_draw(player);
     uint move_x_amt = (N_currtime/20)%2048u;
     uint move_y_amt = (-N_currtime/50)%2048u;
-    NImage_draw(fog, Npos2i(move_x_amt, move_y_amt), 0, 1);
+    /*NImage_draw(fog, Npos2i(move_x_amt, move_y_amt), 0, 1);
     NImage_draw(fog, Npos2i(move_x_amt - 2048, move_y_amt), 0, 1);
     NImage_draw(fog, Npos2i(move_x_amt - 2048, move_y_amt - 2048), 0, 1);
-    NImage_draw(fog, Npos2i(move_x_amt, move_y_amt - 2048), 0, 1);
+    NImage_draw(fog, Npos2i(move_x_amt, move_y_amt - 2048), 0, 1);*/
     NImage_stoprecord();
-    //NImage_draw(swapfbo, NPos2i0, 0, 1);
-    NImage_record(fbo);
+    NImage_draw(swapfbo, NPos2i0, 0, 1);
+    /*NImage_record(fbo);
     glClear(GL_COLOR_BUFFER_BIT);
     glClearColor(0.0, 0.0, 0.0, 2.0);
     NImage_bind(swapfbo);
@@ -71,7 +74,7 @@ void Game_loop() {
     NSquare_draw(NPos2i0, swapfbo->size);
     NShader_stop();
     NImage_unbind();
-    NImage_draw(otherfbo, NPos2i0, 0, 0.85);
+    //NImage_draw(otherfbo, NPos2i0, 0, 0.85);
     NImage_stoprecord();
-    NImage_draw(fbo, NPos2i0, 0, 1);
+    NImage_draw(fbo, NPos2i0, 0, 1);*/
 }

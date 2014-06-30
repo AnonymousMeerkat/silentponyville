@@ -2,15 +2,13 @@
     "title": "Silent Ponyville (IN-DEV)",
     "shaders": [
         [
-            "image",
-            [
+            "image", [
                 [0, "Nvertex_pos"],
                 [1, "Nvertex_UV"]
             ]
         ],
         [
-            "zblur",
-            [
+            "zblur", [
                 [0, "Nvertex_pos"],
                 [1, "Nvertex_UV"]
             ]
@@ -21,17 +19,14 @@
     ],
     "sprites": [
         [
-            "player",
-            [
+            "player", [
                 [
-                    "still",
-                    [
-                        [0, 1000]
+                    "still", [
+                        [0, 10000]
                     ]
                 ],
                 [
-                    "walk",
-                    [
+                    "walk", [
                         [0, 100],
                         [1, 100],
                         [2, 100],
@@ -41,8 +36,7 @@
                     ]
                 ],
                 [
-                    "trot",
-                    [
+                    "trot", [
                         [0, 100],
                         [1, 100],
                         [2, 100],
@@ -51,6 +45,27 @@
                         [5, 100]
                     ]
                 ]
+            ]
+        ]
+    ],
+    "levels": [
+        [
+            "test", [
+                [-2, {}],
+                [-1, {}],
+                [
+                    0, {
+                        "hotspots": [
+                            {
+                                "area": [50, 50, 50, 50],
+                                "type": "click",
+                                "action": 0,
+                                "data": "test"
+                            }
+                        ]
+                    }
+                ],
+                [1, {}]
             ]
         ]
     ]

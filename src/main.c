@@ -4,7 +4,6 @@
 #include "Globals.h"
 #include "entity/Player.h"
 
-NEntity* player;
 NImage* level;
 NImage* fog;
 NImage* fbo1;
@@ -17,10 +16,10 @@ void Game_init() {
     yesno = false;
     Ndebug("Initing!");
     Globals_init();
-    player = Player_new();
+    N_player = Player_new();
     level = N_images[SP_IMAGE_FAKELEVEL];
     fog = N_images[SP_IMAGE_FAKEFOG];
-    player->pos.y = 137;
+    N_player->pos.y = 137;
     fbo1 = NImage_new(NImage_FBO);
     swapfbo = NImage_new(NImage_FBO);
     fbo2 = NImage_new(NImage_FBO);
@@ -31,7 +30,7 @@ void Game_destroy() {
     NImage_destroy(fbo2);
     NImage_destroy(swapfbo);
     NImage_destroy(fbo1);
-    Player_destroy(player);
+    Player_destroy(N_player);
     Globals_destroy();
 }
 
@@ -47,13 +46,14 @@ void Game_loop() {
         otherfbo = fbo1;
     }
     yesno = !yesno;
-    Player_control(player);
-    NEntity_update(player);
+    Player_control(N_player);
+    NEntity_update(N_player);
     NImage_record(swapfbo);
     glClear(GL_COLOR_BUFFER_BIT);
     glClearColor(0.0, 0.0, 0.0, 2.0);
-    NImage_draw(level, NPos2i0, 0, 1);
-    NEntity_draw(player);
+    //NImage_draw(level, NPos2i0, 0, 1);
+    //NEntity_draw(N_player);
+    NLevel_draw(N_levels[0]);
     uint move_x_amt = (N_currtime/20)%2048u;
     uint move_y_amt = (-N_currtime/50)%2048u;
     /*NImage_draw(fog, Npos2i(move_x_amt, move_y_amt), 0, 1);

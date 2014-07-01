@@ -35,10 +35,13 @@ void Game_destroy() {
 }
 
 void Game_loop() {
+    // Check if ESC key is pressed
     if (N_key_states[27]) {
         N_running = false;
         return;
     }
+
+    // Swap FBO's
     NImage* fbo = fbo1;
     NImage* otherfbo = fbo2;
     if (yesno) {
@@ -46,25 +49,37 @@ void Game_loop() {
         otherfbo = fbo1;
     }
     yesno = !yesno;
+
+    // Update entities
     Player_control(N_player);
     NEntity_update(N_player);
+
+    // Start drawing to the base FBO
     NImage_record(swapfbo);
+
     glClear(GL_COLOR_BUFFER_BIT);
     glClearColor(0.0, 0.0, 0.0, 2.0);
-    //NImage_draw(level, NPos2i0, 0, 1);
-    //NEntity_draw(N_player);
+
     NLevel_draw(N_levels[0]);
-    uint move_x_amt = (N_currtime/20)%2048u;
+
+    // Draw fog
+    /*uint move_x_amt = (N_currtime/20)%2048u;
     uint move_y_amt = (-N_currtime/50)%2048u;
-    /*NImage_draw(fog, Npos2i(move_x_amt, move_y_amt), 0, 1);
+    NImage_draw(fog, Npos2i(move_x_amt, move_y_amt), 0, 1);
     NImage_draw(fog, Npos2i(move_x_amt - 2048, move_y_amt), 0, 1);
     NImage_draw(fog, Npos2i(move_x_amt - 2048, move_y_amt - 2048), 0, 1);
     NImage_draw(fog, Npos2i(move_x_amt, move_y_amt - 2048), 0, 1);*/
+
     NImage_stoprecord();
+
     NImage_draw(swapfbo, NPos2i0, 0, 1);
+
+    // Draw postprocessing effects
     NImage_record(fbo);
+
     glClear(GL_COLOR_BUFFER_BIT);
     glClearColor(0.0, 0.0, 0.0, 2.0);
+
     NImage_bind(swapfbo);
     NShader_run(N_shaders[1]);
     GLKVector2 pos_screen = GLKVector2Divide(GLKVector2Subtract(NEntity_center(N_player), Npos2f(N_levels[0]->camera, 0)), GLKpos2i(N_game_size));
@@ -74,7 +89,11 @@ void Game_loop() {
     NSquare_draw(NPos2i0, swapfbo->size);
     NShader_stop();
     NImage_unbind();
+
+    // Draw the other FBO for motion blur
     NImage_draw(otherfbo, NPos2i0, 0, 0.83);
+
     NImage_stoprecord();
+
     NImage_draw(fbo, NPos2i0, 0, 1);
 }

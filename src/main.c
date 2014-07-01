@@ -62,19 +62,19 @@ void Game_loop() {
     NImage_draw(fog, Npos2i(move_x_amt, move_y_amt - 2048), 0, 1);*/
     NImage_stoprecord();
     NImage_draw(swapfbo, NPos2i0, 0, 1);
-    /*NImage_record(fbo);
+    NImage_record(fbo);
     glClear(GL_COLOR_BUFFER_BIT);
     glClearColor(0.0, 0.0, 0.0, 2.0);
     NImage_bind(swapfbo);
     NShader_run(N_shaders[1]);
-    GLKVector2 pos_screen = GLKVector2Divide(GLKVector2Add(player->pos, GLKVector2DivideScalar(GLKpos2i(player->size), 2)), GLKpos2i(N_win_size));
+    GLKVector2 pos_screen = GLKVector2Divide(GLKVector2Add(N_player->pos, GLKVector2DivideScalar(GLKpos2i(N_player->size), 2)), GLKpos2i(N_game_size));
     pos_screen.y = 1-pos_screen.y;
     NShader_set_vec2(N_shaders[1], "SP_pos", pos_screen);
     NShader_set_float(N_shaders[1], "N_alpha", 1);
     NSquare_draw(NPos2i0, swapfbo->size);
     NShader_stop();
     NImage_unbind();
-    //NImage_draw(otherfbo, NPos2i0, 0, 0.85);
+    NImage_draw(otherfbo, NPos2i0, 0, 0.83);
     NImage_stoprecord();
-    NImage_draw(fbo, NPos2i0, 0, 1);*/
+    NImage_draw(fbo, NPos2i0, 0, 1);
 }

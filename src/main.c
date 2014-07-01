@@ -67,7 +67,7 @@ void Game_loop() {
     glClearColor(0.0, 0.0, 0.0, 2.0);
     NImage_bind(swapfbo);
     NShader_run(N_shaders[1]);
-    GLKVector2 pos_screen = GLKVector2Divide(GLKVector2Add(N_player->pos, GLKVector2DivideScalar(GLKpos2i(N_player->size), 2)), GLKpos2i(N_game_size));
+    GLKVector2 pos_screen = GLKVector2Divide(GLKVector2Subtract(NEntity_center(N_player), Npos2f(N_levels[0]->camera, 0)), GLKpos2i(N_game_size));
     pos_screen.y = 1-pos_screen.y;
     NShader_set_vec2(N_shaders[1], "SP_pos", pos_screen);
     NShader_set_float(N_shaders[1], "N_alpha", 1);

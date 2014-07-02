@@ -17,9 +17,10 @@ void Game_init() {
     Ndebug("Initing!");
     Globals_init();
     N_player = Player_new();
+    N_player->pos.y = 137;
+    N_player->z = N_levels[0]->default_layer;
     level = N_images[SP_IMAGE_FAKELEVEL];
     fog = N_images[SP_IMAGE_FAKEFOG];
-    N_player->pos.y = 137;
     fbo1 = NImage_new(NImage_FBO);
     swapfbo = NImage_new(NImage_FBO);
     fbo2 = NImage_new(NImage_FBO);
@@ -75,6 +76,7 @@ void Game_loop() {
     NImage_draw(swapfbo, NPos2i0, 0, 1);
 
     // Draw postprocessing effects
+#if 1
     NImage_record(fbo);
 
     glClear(GL_COLOR_BUFFER_BIT);
@@ -96,4 +98,5 @@ void Game_loop() {
     NImage_stoprecord();
 
     NImage_draw(fbo, NPos2i0, 0, 1);
+#endif
 }

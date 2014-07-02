@@ -43,12 +43,13 @@ void vignette() {
     vec2 center_dir = 0.5 - UV;
     float center_dist = length(center_dir);
     float t = smoothstep(.75, .3, center_dist);
-    out_color.rgb = mix(out_color.rgb, out_color.rgb * t, 0.5);
+    out_color.rgb = mix(out_color.rgb, out_color.rgb * t, 0.7);
 }
 
 void greyscale() {
     float t = dot(out_color.rgb, vec3(0.299, 0.587, 0.114));
-    out_color.rgb = mix(out_color.rgb, vec3(t), 0.5);
+    out_color.rgb = mix(out_color.rgb, vec3(t), 0.6);
+    out_color.rgb *= .9;
 }
 
 void film_noise() {

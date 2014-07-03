@@ -3,6 +3,7 @@
 
 #include "Globals.h"
 #include "entity/Player.h"
+#include "entity/Groaner.h"
 
 NImage* level;
 NImage* fog;

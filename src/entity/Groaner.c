@@ -29,10 +29,16 @@ void Groaner_destroy(NEntity* groaner) {
 void Groaner_update(NEntity* groaner) {
     struct Groaner_data* data = groaner->data;
 
-    if (NEntity_distance(groaner, N_player) > (data->seen_player ? 150 : 100)) {
+    NPosi distance = 100;
+    if (data->seen_player) {
+        distance = 150;
+    } else if (NEntity_facing(groaner, N_player)) {
+        distance = 120;
+    }
+    if (NEntity_distance(groaner, N_player) > distance) {
         NEntity_walk(groaner);
         if (data->dirtime == 0 || (N_currtime - data->lasttime) >= (uint)NABS(data->dirtime)) {
-            data->dirtime = rand() % 2000 + rand() % 2000;
+            data->dirtime = rand() % 2000 + rand() % 2000 + rand() % 2000;
             if (rand() % 2 == 1) {
                 data->dirtime = -data->dirtime;
             }

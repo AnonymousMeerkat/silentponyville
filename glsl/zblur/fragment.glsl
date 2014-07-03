@@ -8,8 +8,8 @@ uniform float N_alpha;
 uniform int N_time;
 uniform int N_rand;
 
-const float sample_dist = 0.3;
-const float sample_strength = 7.2;
+const float sample_dist = 0.2;
+const float sample_strength = 3;
 
 const float samples[12] =
    float[](-0.1, -0.08, -0.05, -0.03, -0.02, -0.01, 0.01, 0.02, 0.03, 0.05, 0.08, 0.1);
@@ -49,7 +49,6 @@ void vignette() {
 void greyscale() {
     float t = dot(out_color.rgb, vec3(0.299, 0.587, 0.114));
     out_color.rgb = mix(out_color.rgb, vec3(t), 0.6);
-    out_color.rgb *= .9;
 }
 
 void film_noise() {

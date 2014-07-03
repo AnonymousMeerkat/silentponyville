@@ -8,6 +8,7 @@ set(SOURCES
     rscdata.c
     Globals.c
     entity/Player.c
+    entity/Groaner.c
     main.c
 )
 

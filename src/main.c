@@ -10,6 +10,8 @@ NImage* fbo1;
 NImage* swapfbo;
 NImage* fbo2;
 
+NEntity* groan;
+
 bool yesno;
 
 void Game_init() {
@@ -19,11 +21,17 @@ void Game_init() {
     N_player = Player_new();
     N_player->pos.y = 137;
     N_player->z = N_levels[0]->default_layer;
+    groan = Groaner_new();
+    groan->pos.x = 400;
+    groan->pos.y = 141;
+    groan->z = N_levels[0]->default_layer;
     level = N_images[SP_IMAGE_FAKELEVEL];
-    fog = N_images[SP_IMAGE_FAKEFOG];
+    //fog = N_images[SP_IMAGE_FAKEFOG];
     fbo1 = NImage_new(NImage_FBO);
     swapfbo = NImage_new(NImage_FBO);
     fbo2 = NImage_new(NImage_FBO);
+
+    NLIST_PUSH(N_levels[0]->entities, groan);
 }
 
 void Game_destroy() {
@@ -52,8 +60,8 @@ void Game_loop() {
     yesno = !yesno;
 
     // Update entities
-    Player_control(N_player);
-    NEntity_update(N_player);
+    Player_update(N_player);
+    Groaner_update(groan);
 
     // Start drawing to the base FBO
     NImage_record(swapfbo);

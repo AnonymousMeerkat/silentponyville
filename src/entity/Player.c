@@ -13,7 +13,7 @@ void Player_destroy(NEntity* player) {
     NEntity_destroy(player);
 }
 
-void Player_control(NEntity* player) {
+void Player_update(NEntity* player) {
 #define check(dir) \
     bool dir##_down = false;\
     for (short i = 0; SP_##dir##_keys[i] && !(dir##_down = N_key_states[(int)SP_##dir##_keys[i]]); i++);
@@ -35,4 +35,6 @@ void Player_control(NEntity* player) {
     } else {
         NEntity_still(player);
     }
+
+    NEntity_update(player);
 }

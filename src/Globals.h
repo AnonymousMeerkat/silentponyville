@@ -9,6 +9,7 @@ void Globals_init();
 void Globals_destroy();
 
 #define SP_SPRITESHEET_PLAYER 0
+#define SP_SPRITESHEET_GROANER 1
 
 #define SP_IMAGE_FAKELEVEL 0
 #define SP_IMAGE_FAKEFOG 1

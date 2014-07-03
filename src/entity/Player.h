@@ -8,7 +8,7 @@ START_HEAD
 NEntity* Player_new();
 void Player_destroy(NEntity* player);
 
-void Player_control(NEntity* player);
+void Player_update(NEntity* player);
 
 END_HEAD
 

@@ -5,6 +5,7 @@
 struct Groaner_data {
     uint lasttime;
     uint alerted_time;
+    uint shock_time;
     int dirtime;
     bool seen_player;
 };
@@ -17,6 +18,8 @@ NEntity* Groaner_new() {
     struct Groaner_data* data = malloc(sizeof(struct Groaner_data));
     data->lasttime = N_currtime;
     data->dirtime = 0;
+    data->alerted_time = 0;
+    data->shock_time = 0;
     groaner->data = data;
 
     return groaner;
@@ -30,19 +33,41 @@ void Groaner_destroy(NEntity* groaner) {
 void Groaner_update(NEntity* groaner) {
     struct Groaner_data* data = groaner->data;
 
-    NPosi distance = 100;
-    if (data->seen_player) {
-        distance = 180;
-    } else if (N_currtime - data->alerted_time < 5000) {
-        if (NEntity_facing(groaner, N_player)) {
-            distance = 160;
+    if (data->shock_time != 0 && N_currtime - data->shock_time < 2000) {
+        if (N_player->state == NEntity_TROT) {
+            data->seen_player = true;
         } else {
-            distance = 140;
+            goto end;
         }
-    } else if (NEntity_facing(groaner, N_player)) {
-        distance = 130;
+    } else {
+        data->shock_time = 0;
     }
-    if (NEntity_distance(groaner, N_player) > distance) {
+
+    bool facing = NEntity_facing(groaner, N_player);
+    NPosi distance = NEntity_distance(groaner, N_player);
+
+    NPosi min_distance = 100;
+    if (data->seen_player) {
+        min_distance = 180;
+    } else if (N_currtime - data->alerted_time < 5000) {
+        if (facing) {
+            min_distance = 160;
+        } else {
+            min_distance = 140;
+        }
+    } else if (facing) {
+        if (SP_moved) {
+            min_distance = 150;
+        } else {
+            min_distance = 130;
+        }
+    }
+    if (distance > min_distance) {
+        if (SP_moved && ((facing && (distance < 180)) || (!facing && (distance < 150)))) {
+                NEntity_still(groaner);
+                data->shock_time = N_currtime;
+                goto end;
+        }
         NEntity_walk(groaner);
         if (data->dirtime == 0 || (N_currtime - data->lasttime) >= (uint)NABS(data->dirtime)) {
             // This will encourage more middleish values
@@ -68,14 +93,15 @@ void Groaner_update(NEntity* groaner) {
         }
 
         data->seen_player = false;
-        groaner->data = data;
     } else {
         NEntity_trot(groaner);
         NEntity_move_towards(groaner, N_player);
         data->dirtime = 0;
         data->seen_player = true;
-        groaner->data = data;
     }
 
+end:
+
+    groaner->data = data;
     NEntity_update(groaner);
 }

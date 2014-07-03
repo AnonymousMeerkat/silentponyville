@@ -20,6 +20,10 @@ extern short* SP_left_keys;
 extern short* SP_right_keys;
 extern short* SP_run_keys;
 
+// Player
+
+extern bool SP_moved;
+
 END_HEAD
 
 #endif

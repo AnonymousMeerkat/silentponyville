@@ -22,6 +22,8 @@ void Player_update(NEntity* player) {
     check(right);
     check(run);
 
+    SP_moved = true;
+
     if (run_down) {
         NEntity_trot(player);
     } else {
@@ -33,6 +35,7 @@ void Player_update(NEntity* player) {
     } else if (right_down) {
         NEntity_right(player);
     } else {
+        SP_moved = false;
         NEntity_still(player);
     }
 

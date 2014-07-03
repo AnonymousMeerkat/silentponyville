@@ -4,6 +4,7 @@
 
 struct Groaner_data {
     uint lasttime;
+    uint alerted_time;
     int dirtime;
     bool seen_player;
 };
@@ -31,17 +32,32 @@ void Groaner_update(NEntity* groaner) {
 
     NPosi distance = 100;
     if (data->seen_player) {
-        distance = 150;
+        distance = 180;
+    } else if (N_currtime - data->alerted_time < 5000) {
+        if (NEntity_facing(groaner, N_player)) {
+            distance = 160;
+        } else {
+            distance = 140;
+        }
     } else if (NEntity_facing(groaner, N_player)) {
-        distance = 120;
+        distance = 130;
     }
     if (NEntity_distance(groaner, N_player) > distance) {
         NEntity_walk(groaner);
         if (data->dirtime == 0 || (N_currtime - data->lasttime) >= (uint)NABS(data->dirtime)) {
+            // This will encourage more middleish values
             data->dirtime = rand() % 2000 + rand() % 2000 + rand() % 2000;
-            if (rand() % 2 == 1) {
+
+            if (data->seen_player) {
+                data->alerted_time = N_currtime;
+
+                if ((groaner->pos.x - N_player->pos.x) < 0) {
+                    data->dirtime = -data->dirtime;
+                }
+            } else if (rand() % 2 == 1) {
                 data->dirtime = -data->dirtime;
             }
+
             data->lasttime = N_currtime;
         }
 

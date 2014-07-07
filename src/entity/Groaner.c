@@ -6,8 +6,10 @@ struct Groaner_data {
     uint lasttime;
     uint alerted_time;
     uint shock_time;
+    uint attack_delay;
     int dirtime;
     bool seen_player;
+    bool attacking;
 };
 
 NEntity* Groaner_new() {
@@ -20,6 +22,10 @@ NEntity* Groaner_new() {
     data->dirtime = 0;
     data->alerted_time = 0;
     data->shock_time = 0;
+    data->attack_delay = 0;
+
+    data->attacking = false;
+    data->seen_player = false;
     groaner->data = data;
 
     return groaner;
@@ -93,11 +99,23 @@ void Groaner_update(NEntity* groaner) {
         }
 
         data->seen_player = false;
-    } else {
+    } else if (distance > 50) {
         NEntity_trot(groaner);
         NEntity_move_towards(groaner, N_player);
         data->dirtime = 0;
         data->seen_player = true;
+    } else {
+        if (data->attacking && groaner->state != NEntity_ATTACK) {
+            if (data->attack_delay == 0) {
+                data->attack_delay = N_currtime;
+            } else if ((N_currtime - data->attack_delay) >= 500) {
+                NEntity_attack(groaner);
+            }
+        } else {
+            NEntity_attack(groaner);
+            data->attacking = true;
+            data->attack_delay = 0;
+        }
     }
 
 end:

@@ -9,7 +9,7 @@ uniform int N_time;
 uniform int N_rand;
 
 const float sample_dist = 0.2;
-const float sample_strength = 3;
+const float sample_strength = 1.5;
 
 const float samples[12] =
    float[](-0.1, -0.08, -0.05, -0.03, -0.02, -0.01, 0.01, 0.02, 0.03, 0.05, 0.08, 0.1);

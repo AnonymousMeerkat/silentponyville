@@ -58,23 +58,26 @@ function show_page(name) {
 
     $(".page").each(function() {
         var $this = $(this);
-        if (("#" + $this.attr("id")) !== name) {
+        if (("#" + $this.attr("id")) !== name && $this.attr("sp_transit") !== "true") {
             $this.transition({
                 opacity: 0,
                 duration: 1000
             });
             $this.css("z-index", 0);
+            $this.attr("sp_transit", "true");
         }
     });
 
     var $this = $(name);
-
-    show_el($this);
-    $this.transition({
-        opacity: 1,
-        duration: 1000
-    })
-    $this.css("z-index", 1000);
+    if ($this.attr("sp_transit") !== "false") {
+        show_el($this);
+        $this.transition({
+            opacity: 1,
+            duration: 1000
+        })
+        $this.css("z-index", 1000);
+        $this.attr("sp_transit", "false");
+    }
 }
 
 $(function() {

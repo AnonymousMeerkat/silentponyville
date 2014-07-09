@@ -21,6 +21,7 @@ body {
 
 #gamemenu {
     list-style-type: none;
+    position: fixed;
 }
 
 #gamemenu li {
@@ -29,5 +30,30 @@ body {
     padding-left: 0;
     padding-right: 0;
     cursor: pointer;
-    border: none;
+}
+
+.blog_post {
+    text-align: left;
+    position: relative;
+}
+
+.blog_title {
+    padding: 15px;
+    cursor: pointer;
+}
+
+.blog_body {
+    font-size: 18pt;
+    padding-left: 30px;
+    overflow: hidden;
+}
+
+hr {
+    height: 1px;
+    border: 0;
+    background: #eee;
+    background-image: -webkit-linear-gradient(left, #111, #ddd, #111);
+    background-image:    -moz-linear-gradient(left, #111, #ddd, #111);
+    background-image:     -ms-linear-gradient(left, #111, #ddd, #111);
+    background-image:      -o-linear-gradient(left, #111, #ddd, #111);
 }

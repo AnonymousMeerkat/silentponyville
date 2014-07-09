@@ -38,15 +38,20 @@ function animate_menu() {
     for (var i = 0; i < li_amt; i++) {
         var $this = $($gamemenu_li[i]);
         $this.css({
-            "width": spacing - 1
+            "width": spacing
         });
-        centerw_el($("#content"));
+    }
+
+    centerw_el($("#gamemenu"));
+
+    for (var i = 0; i < li_amt; i++) {
+        var $this = $($gamemenu_li[i]);
         var offset = $this.offset();
         $this.transition({
             y: -offset.top,
             x: i * spacing - offset.left,
             duration: 700
-        })
+        });
     }
 }
 
@@ -80,6 +85,23 @@ function show_page(name) {
     }
 }
 
+function show_post(name) {
+    var $this = $(name);
+    if ($this.attr("sp_shown") !== "true") {
+        $this.transition({
+            height: $this.attr("oldheight"),
+            duration: 700
+        });
+        $this.attr("sp_shown", "true");
+    } else {
+        $this.transition({
+            height: 0,
+            duration: 700
+        });
+        $this.attr("sp_shown", "false");
+    }
+}
+
 $(function() {
     width = $(document).width();
     height = $(document).height();
@@ -95,6 +117,15 @@ $(function() {
         top: $("#gamemenu").offset().top
     })
     hide_el($(".page"));
+
+    $(".blog_body").each(function() {
+        var $this = $(this);
+        $this.attr("oldheight", $this.height());
+        $this.css("height", 0);
+        $this.parent().children(".blog_title").attr("onclick", "show_post('#" + $this.attr("id") + "');");
+    });
+
+    center_el($("#gamemenu"));
 
     center_el($("#content"));
     show_el($("#content"));

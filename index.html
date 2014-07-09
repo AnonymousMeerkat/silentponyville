@@ -1,3 +1,7 @@
+---
+layout: basic
+title: Index
+---
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,30 +20,41 @@
 
 <body>
 
-    <div id="checkage" class="hidden">
-        Please confirm your birth date:
-        <br />
-        <select id="checkage_year">
-        </select>
-    </div>
-
     <div id="content" class="hidden">
         <ul id="gamemenu">
             <li page="about">ABOUT</li>
-            <li page="play">PLAY</li>
+            <li page="blog">BLOG</li>
             <li page="contact">CONTACT</li>
+            <li page="download">DOWNLOAD</li>
         </ul>
 
         <div id="about" class="page">
             A survival horror video game
         </div>
 
-        <div id="play" class="page">
+        <div id="download" class="page">
             <p>This game is currently in-dev, and at this stage, we cannot offer any download links.</p>
             <br /><br />
             <p>Don't worry though!
             <br /><br />
             We are working as fast as we can to finish this game! Without sacrificing quality, of course ^^</p>
+        </div>
+
+        <div id="blog" class="page">
+            {% assign blog_id = 0 %}
+            {% assign first_post = true %}
+            {% for post in site.posts %}
+                {% if first_post %}
+                    {% assign first_post = false %}
+                {% else %}
+                    <hr />
+                {% endif %}
+                <div class="blog_post" id="bp_{{ blog_id }}">
+                    <div class="blog_title" id="bt_{{ blog_id }}">{{ post.title }}</div>
+                    <div class="blog_body" id="bb_{{ blog_id }}">{{ post.content }}</div>
+                </div>
+                {% capture blog_id %}{{ blog_id | plus: 1 }}{% endcapture %}
+            {% endfor %}
         </div>
 
         <div id="contact" class="page">

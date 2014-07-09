@@ -1,5 +1,7 @@
 var width;
 var height;
+var liheight;
+var liamt;
 
 var menu_center = true;
 
@@ -31,18 +33,17 @@ function center_el(element) {
 }
 
 function animate_menu() {
+    var $gamemenu = $("#gamemenu");
     var $gamemenu_li = $("#gamemenu li");
     var li_amt = $gamemenu_li.length;
     var spacing = width / li_amt;
 
-    for (var i = 0; i < li_amt; i++) {
+    /*for (var i = 0; i < li_amt; i++) {
         var $this = $($gamemenu_li[i]);
-        $this.css({
-            "width": spacing
-        });
-    }
+        $this.width(spacing);
+    }*/
 
-    centerw_el($("#gamemenu"));
+    centerw_el($gamemenu);
 
     for (var i = 0; i < li_amt; i++) {
         var $this = $($gamemenu_li[i]);
@@ -68,6 +69,7 @@ function show_page(name) {
                 opacity: 0,
                 duration: 1000
             });
+            setTimeout(function() {hide_el($this)}, 1000);
             $this.css("z-index", 0);
             $this.attr("sp_transit", "true");
         }
@@ -88,33 +90,68 @@ function show_page(name) {
 function show_post(name) {
     var $this = $(name);
     if ($this.attr("sp_shown") !== "true") {
+        var oldheight = parseInt($this.attr("oldheight"), 10);
         $this.transition({
-            height: $this.attr("oldheight"),
-            duration: 700
+            height: oldheight,
+            duration: 500
         });
+        var twopars = $this.parent().parent().parent();
+        if ($this.offset().top + oldheight + window.screenY > height) {
+            console.log("At ze buttom");
+            twopars.scroll();
+            twopars.animate({
+                scrollTop: twopars.scrollTop() + $this.offset().top + oldheight + window.screenY - height + 26
+            }, 500);
+            //setTimeout(function() {twopars.scrollTop(twopars.scrollTop() + oldheight)}, 600);
+        }
         $this.attr("sp_shown", "true");
     } else {
         $this.transition({
             height: 0,
-            duration: 700
+            duration: 500
         });
         $this.attr("sp_shown", "false");
     }
 }
 
 $(function() {
-    width = $(document).width();
-    height = $(document).height();
+    width = $(window).width();
+    height = $(window).height();
+
+    var $content = $("#content");
+    $content.offset({top: 0, left: 0});
+    $content.height(height);
+
+    var liamt = $("#gamemenu li").length;
+    var i = 0;
+
+    var spacing = width / liamt;
 
     $("#gamemenu li").each(function() {
         var $this = $(this);
+        liheight = $this.innerHeight();
+        $this.offset({left: (width - spacing) / 2, top: (height - (liamt * liheight)) / 2 + i * liheight});
+        $this.width(spacing);
         var text = $this.html();
         var page = $this.attr("page");
         $this.attr("onclick", "show_page('#" + page + "');");
+        i++;
     });
 
-    $(".page").offset({
+    //$("#gamemenubg").width(width);
+    $("#gamemenubg").height(liheight);
+
+    /*$(".page").offset({
         top: $("#gamemenu").offset().top
+    })*/
+    $(".page").each(function() {
+        var $this = $(this);
+        $this.width(width);
+        center_el($this);
+        if ($this.offset().top < 70) {
+            $this.offset({top: 70});
+        }
+        $this.height(Math.min($this.height() + 5, height - $this.offset().top));
     })
     hide_el($(".page"));
 
@@ -127,6 +164,9 @@ $(function() {
 
     center_el($("#gamemenu"));
 
-    center_el($("#content"));
-    show_el($("#content"));
+    /*center_el($content);
+    if ($content.offset().top < 100) {
+        $content.offset({top: 100});
+    }*/
+    show_el($content);
 });

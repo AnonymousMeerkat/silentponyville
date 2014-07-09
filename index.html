@@ -27,9 +27,14 @@ title: Index
             <li page="contact">CONTACT</li>
             <li page="download">DOWNLOAD</li>
         </ul>
+        <div id="gamemenubg"></div>
 
         <div id="about" class="page">
             A survival horror video game
+        </div>
+
+        <div id="contact" class="page">
+            <p>We currently have no contact information, but this will hopefully change soon!</p>
         </div>
 
         <div id="download" class="page">
@@ -41,24 +46,62 @@ title: Index
         </div>
 
         <div id="blog" class="page">
-            {% assign blog_id = 0 %}
-            {% assign first_post = true %}
-            {% for post in site.posts %}
-                {% if first_post %}
-                    {% assign first_post = false %}
-                {% else %}
-                    <hr />
-                {% endif %}
-                <div class="blog_post" id="bp_{{ blog_id }}">
-                    <div class="blog_title" id="bt_{{ blog_id }}">{{ post.title }}</div>
-                    <div class="blog_body" id="bb_{{ blog_id }}">{{ post.content }}</div>
-                </div>
-                {% capture blog_id %}{{ blog_id | plus: 1 }}{% endcapture %}
-            {% endfor %}
-        </div>
-
-        <div id="contact" class="page">
-            <p>We currently have no contact information, but this will hopefully change soon!</p>
+            <div id="innerblog">
+                {% assign blog_id = 0 %}
+                {% assign first_post = true %}
+                {% for post in site.posts %}
+                    {% if first_post %}
+                        {% assign first_post = false %}
+                    {% else %}
+                        <hr />
+                    {% endif %}
+                    <div class="blog_post" id="bp_{{ blog_id }}">
+                        <div class="blog_title" id="bt_{{ blog_id }}">{{ post.title }}</div>
+                        <div class="blog_body" id="bb_{{ blog_id }}">{{ post.content }}</div>
+                    </div>
+                    {% capture blog_id %}{{ blog_id | plus: 1 }}{% endcapture %}
+                    {% if first_post %}
+                        {% assign first_post = false %}
+                    {% else %}
+                        <hr />
+                    {% endif %}
+                    <div class="blog_post" id="bp_{{ blog_id }}">
+                        <div class="blog_title" id="bt_{{ blog_id }}">{{ post.title }}</div>
+                        <div class="blog_body" id="bb_{{ blog_id }}">{{ post.content }}</div>
+                    </div>
+                    {% capture blog_id %}{{ blog_id | plus: 1 }}{% endcapture %}
+                    {% if first_post %}
+                        {% assign first_post = false %}
+                    {% else %}
+                        <hr />
+                    {% endif %}
+                    <div class="blog_post" id="bp_{{ blog_id }}">
+                        <div class="blog_title" id="bt_{{ blog_id }}">{{ post.title }}</div>
+                        <div class="blog_body" id="bb_{{ blog_id }}">{{ post.content }}</div>
+                    </div>
+                    {% capture blog_id %}{{ blog_id | plus: 1 }}{% endcapture %}
+                    {% if first_post %}
+                        {% assign first_post = false %}
+                    {% else %}
+                        <hr />
+                    {% endif %}
+                    <div class="blog_post" id="bp_{{ blog_id }}">
+                        <div class="blog_title" id="bt_{{ blog_id }}">{{ post.title }}</div>
+                        <div class="blog_body" id="bb_{{ blog_id }}">{{ post.content }}</div>
+                    </div>
+                    {% capture blog_id %}{{ blog_id | plus: 1 }}{% endcapture %}
+                    {% if first_post %}
+                        {% assign first_post = false %}
+                    {% else %}
+                        <hr />
+                    {% endif %}
+                    <div class="blog_post" id="bp_{{ blog_id }}">
+                        <div class="blog_title" id="bt_{{ blog_id }}">{{ post.title }}</div>
+                        <div class="blog_body" id="bb_{{ blog_id }}">{{ post.content }}</div>
+                    </div>
+                    {% capture blog_id %}{{ blog_id | plus: 1 }}{% endcapture %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 

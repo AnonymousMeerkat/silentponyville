@@ -1,0 +1,33 @@
+body {
+    background-color: #050505;
+    color: #ddd;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.page {
+    opacity: 0;
+    font-weight: 300;
+    font-size: 20pt;
+}
+
+#content, #checkage {
+    font-family: 'Open Sans', sans-serif;
+    position: absolute;
+    text-align: center;
+}
+
+#gamemenu {
+    list-style-type: none;
+}
+
+#gamemenu li {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 0;
+    padding-right: 0;
+    cursor: pointer;
+    border: none;
+}

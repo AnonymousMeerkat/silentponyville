@@ -45,6 +45,11 @@ function animate_menu() {
 
     centerw_el($gamemenu);
 
+    $("#logo").transition({
+        opacity: 0,
+        duration: 500
+    });
+
     for (var i = 0; i < li_amt; i++) {
         var $this = $($gamemenu_li[i]);
         var offset = $this.offset();
@@ -69,9 +74,9 @@ function show_page(name) {
                 opacity: 0,
                 duration: 1000
             });
-            setTimeout(function() {hide_el($this)}, 1000);
-            $this.css("z-index", 0);
             $this.attr("sp_transit", "true");
+            setTimeout(function() {if ($this.attr("sp_transit") !== "false") {hide_el($this)}}, 1000);
+            $this.css("z-index", 0);
         }
     });
 
@@ -114,7 +119,7 @@ function show_post(name) {
     }
 }
 
-$(function() {
+$(document).ready(function() {
     width = $(window).width();
     height = $(window).height();
 
@@ -168,5 +173,14 @@ $(function() {
     if ($content.offset().top < 100) {
         $content.offset({top: 100});
     }*/
-    show_el($content);
+
+    var $logo = $("#logo");
+    $logo.load(function() {
+        $logo.width($logo.width() * .5);
+        $logo.offset({
+            top: 20 + (($("#gamemenu").offset().top / 2 - $logo.height()) / 2)
+        });
+        centerw_el($logo);
+        show_el($content);
+    });
 });

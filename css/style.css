@@ -82,3 +82,8 @@ hr {
     background-image:     -ms-linear-gradient(left, #111, #ddd, #111);
     background-image:      -o-linear-gradient(left, #111, #ddd, #111);
 }
+
+#logo {
+    position: absolute;
+    z-index: 0;
+}

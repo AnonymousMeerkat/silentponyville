@@ -132,6 +132,8 @@ $(document).ready(function() {
 
     var spacing = width / liamt;
 
+    $(".contactinfos a").attr("target", "_blank");
+
     $("#gamemenu li").each(function() {
         var $this = $(this);
         liheight = $this.innerHeight();

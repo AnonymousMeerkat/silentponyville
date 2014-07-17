@@ -87,3 +87,21 @@ hr {
     position: absolute;
     z-index: 0;
 }
+
+.contactinfos {
+    width: 530px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+    border: 0;
+}
+
+.contactme {
+    width: 128px;
+    height: 128px;
+    line-height: 0;
+    margin: 64px;
+    padding: 0;
+    border: 0;
+    border-image-width: 0;
+}

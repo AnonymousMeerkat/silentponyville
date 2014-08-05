@@ -32,6 +32,8 @@ void Game_init() {
     swapfbo = NImage_new(NImage_FBO);
     fbo2 = NImage_new(NImage_FBO);
 
+    fog = NRsc_load_fog("fog.fog3");
+
     NLIST_PUSH(N_levels[0]->entities, groan);
 }
 
@@ -40,6 +42,7 @@ void Game_destroy() {
     NImage_destroy(fbo2);
     NImage_destroy(swapfbo);
     NImage_destroy(fbo1);
+    NImage_destroy(fog);
     Player_destroy(N_player);
     Globals_destroy();
 }
@@ -73,16 +76,18 @@ void Game_loop() {
     NLevel_draw(N_levels[0]);
 
     // Draw fog
-    /*uint move_x_amt = (N_currtime/20)%2048u;
-    uint move_y_amt = (-N_currtime/50)%2048u;
-    NImage_draw(fog, Npos2i(move_x_amt, move_y_amt), 0, 1);
-    NImage_draw(fog, Npos2i(move_x_amt - 2048, move_y_amt), 0, 1);
-    NImage_draw(fog, Npos2i(move_x_amt - 2048, move_y_amt - 2048), 0, 1);
-    NImage_draw(fog, Npos2i(move_x_amt, move_y_amt - 2048), 0, 1);*/
+    uint move_x_amt = (N_currtime/40)%1024u;
+    uint move_y_amt = (-N_currtime/100)%1024u;
+    NShader_run(N_shaders[3]);
+    NIMAGE_DRAW(fog, .size = Npos2i(1024, 1024), .pos = Npos2i(move_x_amt, move_y_amt));
+    NIMAGE_DRAW(fog, .size = Npos2i(1024, 1024), .pos = Npos2i(move_x_amt - 1024, move_y_amt));
+    NIMAGE_DRAW(fog, .size = Npos2i(1024, 1024), .pos = Npos2i(move_x_amt - 1024, move_y_amt - 1024));
+    NIMAGE_DRAW(fog, .size = Npos2i(1024, 1024), .pos = Npos2i(move_x_amt, move_y_amt - 1024));
+    NShader_stop();
 
     NImage_stoprecord();
 
-    NImage_draw(swapfbo, NPos2i0, 0, 1);
+    NIMAGE_DRAW(swapfbo);
 
     // Draw postprocessing effects
 #if 1
@@ -91,21 +96,18 @@ void Game_loop() {
     glClear(GL_COLOR_BUFFER_BIT);
     glClearColor(0.0, 0.0, 0.0, 2.0);
 
-    NImage_bind(swapfbo);
     NShader_run(N_shaders[1]);
-    GLKVector2 pos_screen = GLKVector2Divide(GLKVector2Subtract(NEntity_center(N_player), Npos2f(N_levels[0]->camera, 0)), GLKpos2i(N_game_size));
+    GLKVector2 pos_screen = GLKVector2Divide(GLKVector2Subtract(NEntity_center(N_player), Npos2f(N_levels[0]->camera, 0)), Npos2i_2f(N_game_size));
     pos_screen.y = 1-pos_screen.y;
     NShader_set_vec2(N_shaders[1], "SP_pos", pos_screen);
-    NShader_set_float(N_shaders[1], "N_alpha", 1);
-    NSquare_draw(NPos2i0, swapfbo->size);
+    NIMAGE_DRAW(swapfbo);
     NShader_stop();
-    NImage_unbind();
 
     // Draw the other FBO for motion blur
-    NImage_draw(otherfbo, NPos2i0, 0, 0.83);
+    NIMAGE_DRAW(otherfbo, .alpha = 0.83);
 
     NImage_stoprecord();
 
-    NImage_draw(fbo, NPos2i0, 0, 1);
+    NIMAGE_DRAW(fbo);
 #endif
 }

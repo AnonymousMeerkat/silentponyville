@@ -1,10 +1,7 @@
-#version 130
-
 in vec2 UV;
 in vec2 pos;
 out vec4 out_color;
 uniform sampler2D texsampler;
-uniform float N_alpha;
 uniform int N_time;
 uniform int N_rand;
 

@@ -1,9 +1,6 @@
-#version 130
-
 in vec2 UV;
 out vec4 color;
-uniform sampler2D texsampler;
-uniform float N_alpha;
+uniform sampler2D samp2D;
 uniform float sample_dist;
 
 #define NUM_SAMPLES 8
@@ -18,7 +15,7 @@ void main() {
     float a = 0;
     for (int i = 0; i < NUM_SAMPLES; i++) {
         for (int j = 0; j < NUM_SAMPLES; j++) {
-            a += texture2D(texsampler, UV + vec2(samples[i], samples[j]) * sample_dist).a;
+            a += texture(samp2D, UV + vec2(samples[i], samples[j]) * sample_dist).a;
         }
     }
 

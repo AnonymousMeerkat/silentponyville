@@ -15,7 +15,7 @@ NEntity* groan;
 
 bool yesno;
 
-void Game_init() {
+bool Game_init() {
     yesno = false;
     Ndebug("Initing!");
     Globals_init();
@@ -35,6 +35,8 @@ void Game_init() {
     fog = NRsc_load_fog("fog.fog3");
 
     NLIST_PUSH(N_levels[0]->entities, groan);
+
+    return true;
 }
 
 void Game_destroy() {

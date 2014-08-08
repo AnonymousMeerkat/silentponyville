@@ -1,9 +1,6 @@
-in vec2 UV;
-in vec2 pos;
-out vec4 out_color;
+varying vec2 UV;
+varying vec2 pos;
 uniform sampler2D texsampler;
-uniform int N_time;
-uniform int N_rand;
 
 const float sample_dist = 0.2;
 const float sample_strength = 1.5;
@@ -22,7 +19,7 @@ void rad_blur() {
     float player_dist = length(player_dir);
     player_dir /= player_dist;
 
-    vec4 sum = out_color;
+    vec4 sum = gl_FragColor;
 
     for (int i = 0; i < 12; i++) {
       sum += texture2D(texsampler, UV + player_dir * samples[i] * sample_dist);
@@ -33,19 +30,19 @@ void rad_blur() {
     float t = player_dist * sample_strength;
     t = clamp(t, 0., 1.);
 
-    out_color = mix(out_color, sum, t);
+    gl_FragColor = mix(gl_FragColor, sum, t);
 }
 
 void vignette() {
     vec2 center_dir = 0.5 - UV;
     float center_dist = length(center_dir);
     float t = smoothstep(.75, .3, center_dist);
-    out_color.rgb = mix(out_color.rgb, out_color.rgb * t, 0.7);
+    gl_FragColor.rgb = mix(gl_FragColor.rgb, gl_FragColor.rgb * t, 0.7);
 }
 
 void greyscale() {
-    float t = dot(out_color.rgb, vec3(0.299, 0.587, 0.114));
-    out_color.rgb = mix(out_color.rgb, vec3(t), 0.6);
+    float t = dot(gl_FragColor.rgb, vec3(0.299, 0.587, 0.114));
+    gl_FragColor.rgb = mix(gl_FragColor.rgb, vec3(t), 0.6);
 }
 
 void film_noise() {
@@ -53,14 +50,14 @@ void film_noise() {
     vec4 grain = vec4(mod((mod(x, 13) + 1) * (mod(x, 123) + 1), 0.01)-0.005) * 16;
     //vec4 grain = vec4(mod((mod(x, 13) + 1) * (mod(x, 123) + 1), 0.01));
 
-    out_color += grain;
+    gl_FragColor += grain;
 
-    out_color -= rand(vec2(N_rand, N_time)) * 0.1;
+    gl_FragColor -= rand(vec2(N_rand, N_time)) * 0.1;
 }
 
 void main() {
-    out_color = texture2D(texsampler, UV);
-    out_color.a *= N_alpha;
+    gl_FragColor = texture2D(texsampler, UV);
+    gl_FragColor.a *= N_alpha;
 
     rad_blur();
     vignette();

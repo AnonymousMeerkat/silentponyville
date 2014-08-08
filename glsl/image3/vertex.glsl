@@ -1,5 +1,4 @@
-out vec3 UV;
-uniform int N_time;
+varying vec3 UV;
 
 void main() {
     Nsetpos();

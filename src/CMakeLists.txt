@@ -14,4 +14,4 @@ set(SOURCES
 
 include_directories(${INCLUDES})
 
-add_library(game ${SOURCES})
+add_library(game STATIC ${SOURCES})

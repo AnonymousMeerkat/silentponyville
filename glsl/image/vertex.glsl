@@ -1,4 +1,4 @@
-out vec2 UV;
+varying vec2 UV;
 
 void main() {
     Nsetpos();

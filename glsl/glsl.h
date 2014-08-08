@@ -1,4 +1,6 @@
-#version 130
+#version 120
+
+#extension GL_EXT_gpu_shader4 : enable
 
 in vec3 Nvertex_pos;
 in vec2 Nvertex_UV;
@@ -8,6 +10,8 @@ uniform bool N_UV_flip;
 uniform float N_UV_z;
 uniform float N_alpha;
 uniform bool N_3D;
+uniform int N_time;
+uniform int N_rand;
 
 #define Nsetpos() gl_Position = N_MVP * vec4(Nvertex_pos, 1)
 #define NsetUVflip() {\

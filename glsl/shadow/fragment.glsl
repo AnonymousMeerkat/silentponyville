@@ -1,5 +1,4 @@
-in vec2 UV;
-out vec4 color;
+varying vec2 UV;
 uniform sampler2D samp2D;
 uniform float sample_dist;
 
@@ -10,12 +9,12 @@ const float samples[NUM_SAMPLES] =
    float[](-0.1, -0.075, -0.05, -0.025, 0.025, 0.05, 0.075, 0.1);
 
 void main() {
-    color.rgb = vec3(0);
+    gl_FragColor.rgb = vec3(0);
 
     float a = 0;
     for (int i = 0; i < NUM_SAMPLES; i++) {
         for (int j = 0; j < NUM_SAMPLES; j++) {
-            a += texture(samp2D, UV + vec2(samples[i], samples[j]) * sample_dist).a;
+            a += texture2D(samp2D, UV + vec2(samples[i], samples[j]) * sample_dist).a;
         }
     }
 
@@ -23,5 +22,5 @@ void main() {
 
     a *= N_alpha;
 
-    color.a = a;
+    gl_FragColor.a = a;
 }

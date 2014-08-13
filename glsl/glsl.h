@@ -1,5 +1,5 @@
 #define VERT_HEAD attribute vec3 Nvertex_pos;\
-                  attribute vec2 Nvertex_UV;
+                  attribute vec2 Nvertex_UV
 
 uniform mat4 N_MVP;
 uniform bool N_UV_flip;

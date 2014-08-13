@@ -19,9 +19,9 @@ void main() {
     samples[6] = 0.075;
     samples[7] = 0.1;
 
-    gl_FragColor.rgb = vec3(0);
+    gl_FragColor.rgb = vec3(0.);
 
-    float a = 0;
+    float a = 0.;
     for (int i = 0; i < NUM_SAMPLES; i++) {
         for (int j = 0; j < NUM_SAMPLES; j++) {
             a += texture2D(samp2D, UV + vec2(samples[i], samples[j]) * sample_dist).a;

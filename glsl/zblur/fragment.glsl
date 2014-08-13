@@ -11,7 +11,7 @@ const float sample_strength = 1.5;
 float rand(vec2 n)
 {
   return 0.5 + 0.5 *
-     fract(sin(dot(vec2(mod(N_rand, n.x), mod(N_rand, n.y)), vec2(12.9898, 78.233)))* (43758.5453));
+     fract(sin(dot(vec2(N_rand % int(n.x), N_rand % int(n.y)), vec2(12.9898, 78.233)))* (43758.5453));
 }
 
 void rad_blur() {
@@ -62,7 +62,7 @@ void greyscale() {
 
 void film_noise() {
     float x = rand(UV);
-    vec4 grain = vec4(mod((mod(x, 13) + 1) * (mod(x, 123) + 1), 0.01)-0.005) * 16;
+    vec4 grain = vec4(mod((mod(x, 13.) + 1.) * (mod(x, 123.) + 1.), 0.01)-0.005) * 16.;
     //vec4 grain = vec4(mod((mod(x, 13) + 1) * (mod(x, 123) + 1), 0.01));
 
     gl_FragColor += grain;

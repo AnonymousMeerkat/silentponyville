@@ -1,7 +1,5 @@
-#extension GL_EXT_gpu_shader4 : enable
-
-in vec3 Nvertex_pos;
-in vec2 Nvertex_UV;
+#define VERT_HEAD attribute vec3 Nvertex_pos;\
+                  attribute vec2 Nvertex_UV;
 
 uniform mat4 N_MVP;
 uniform bool N_UV_flip;

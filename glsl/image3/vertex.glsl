@@ -1,3 +1,5 @@
+VERT_HEAD;
+
 varying vec3 UV;
 
 void main() {

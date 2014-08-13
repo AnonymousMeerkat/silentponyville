@@ -28,9 +28,9 @@ void main() {
         }
     }
 
-    a /= NUM_SAMPLES2;
+    a = a / NUM_SAMPLES2;
 
-    a *= N_alpha;
+    a = a * N_alpha;
 
     gl_FragColor.a = a;
 }

@@ -1,5 +1,3 @@
-#version 120
-
 #extension GL_EXT_gpu_shader4 : enable
 
 in vec3 Nvertex_pos;
@@ -16,7 +14,7 @@ uniform int N_rand;
 #define Nsetpos() gl_Position = N_MVP * vec4(Nvertex_pos, 1)
 #define NsetUVflip() {\
     if (N_UV_flip) {\
-        UV.x = 1 - UV.x;\
+        UV.x = 1. - UV.x;\
     }\
 }
 #define NsetUV() {\

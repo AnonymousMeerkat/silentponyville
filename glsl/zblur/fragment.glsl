@@ -11,7 +11,7 @@ const float sample_strength = 1.5;
 float rand(vec2 n)
 {
   return 0.5 + 0.5 *
-     fract(sin(dot(vec2(N_rand % int(n.x), N_rand % int(n.y)), vec2(12.9898, 78.233)))* (43758.5453));
+     fract(sin(dot(vec2(modu(N_rand, int(n.x)), modi(N_rand, int(n.y))), vec2(12.9898, 78.233)))* (43758.5453));
 }
 
 void rad_blur() {

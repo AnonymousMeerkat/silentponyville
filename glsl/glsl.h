@@ -9,6 +9,12 @@ uniform bool N_3D;
 uniform int N_time;
 uniform int N_rand;
 
+#ifdef GL_ES
+#define modi(x, y) (x - (int(x / y) * y))
+#else
+#define modi(x, y) mod(x, y)
+#endif
+
 #define Nsetpos() gl_Position = N_MVP * vec4(Nvertex_pos, 1)
 #define NsetUVflip() {\
     if (N_UV_flip) {\

@@ -28,7 +28,7 @@ void main() {
         }
     }
 
-    a = a / NUM_SAMPLES2;
+    a = a / float(NUM_SAMPLES2);
 
     a = a * N_alpha;
 

@@ -8,5 +8,5 @@ varying vec2 pos;
 void main() {
     Nsetpos();
     NsetUV();
-    pos = vec2(0.);
+    pos = SP_pos;
 }

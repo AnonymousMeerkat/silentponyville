@@ -1,6 +1,8 @@
 #include "Groaner.h"
 
 #include "../Globals.h"
+#include <NGlobals.h>
+#include <stdlib.h>
 
 struct Groaner_data {
     uint lasttime;

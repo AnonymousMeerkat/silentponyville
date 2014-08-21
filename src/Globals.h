@@ -1,7 +1,7 @@
 #ifndef _SP_GLOBALS_H
 #define _SP_GLOBALS_H
 
-#include <Nightmare.h>
+#include <NCompat.h>
 
 START_HEAD
 

@@ -1,4 +1,10 @@
-#include <Nightmare.h>
+#include <NImage.h>
+#include <NEntity.h>
+#include <NLevel.h>
+#include <NLog.h>
+#include <NRsc.h>
+#include <NShader.h>
+#include <wrap/gl.h>
 #include <GLKit/GLKMath.h>
 
 #include "Globals.h"

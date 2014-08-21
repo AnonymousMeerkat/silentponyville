@@ -1,6 +1,7 @@
 #include "Player.h"
 
 #include "../Globals.h"
+#include <NGlobals.h>
 
 NEntity* Player_new() {
     NEntity_info Player_info = {

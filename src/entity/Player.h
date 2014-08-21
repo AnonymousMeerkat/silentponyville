@@ -1,9 +1,11 @@
 #ifndef _SP_ENTITY_PLAYER_H
 #define _SP_ENTITY_PLAYER_H
 
-#include <Nightmare.h>
+#include <NCompat.h>
 
 START_HEAD
+
+#include <NEntity.h>
 
 NEntity* Player_new();
 void Player_destroy(NEntity* player);

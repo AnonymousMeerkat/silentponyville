@@ -1,6 +1,6 @@
 #include "Globals.h"
 
-#include <Nightmare.h>
+#include <NWMan.h>
 
 #define genkeys(type, ...)\
 short _SP_##type##_keys[] = {\

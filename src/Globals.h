@@ -1,9 +1,7 @@
 #ifndef _SP_GLOBALS_H
 #define _SP_GLOBALS_H
 
-#include <NCompat.h>
-
-START_HEAD
+#include <NTypes.h>
 
 void Globals_init();
 void Globals_destroy();
@@ -23,7 +21,5 @@ extern short* SP_run_keys;
 // Player
 
 extern bool SP_moved;
-
-END_HEAD
 
 #endif

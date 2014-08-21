@@ -5,16 +5,19 @@ uniform sampler2D texsampler;
 const float sample_dist = 0.2;
 const float sample_strength = 1.5;
 
-/*const float samples[12] =
-   float[](-0.1, -0.08, -0.05, -0.03, -0.02, -0.01, 0.01, 0.02, 0.03, 0.05, 0.08, 0.1);*/
+#ifndef GL_ES
+const float samples[12] =
+   float[](-0.1, -0.08, -0.05, -0.03, -0.02, -0.01, 0.01, 0.02, 0.03, 0.05, 0.08, 0.1);
+#endif
 
 float rand(vec2 n)
 {
   return 0.5 + 0.5 *
-     fract(sin(dot(vec2(modi(N_rand, int(n.x)), modi(N_rand, int(n.y))), vec2(12.9898, 78.233)))* (43758.5453));
+     fract(sin(dot(vec2(mod(float(N_rand), n.x), mod(float(N_rand), n.y)), vec2(12.9898, 78.233)))* (43758.5453));
 }
 
 void rad_blur() {
+#ifdef GL_ES
     float samples[12];
     int i = 0;
     samples[i++] = -0.1;
@@ -29,6 +32,7 @@ void rad_blur() {
     samples[i++] = 0.03;
     samples[i++] = 0.02;
     samples[i] = 0.01;
+#endif
 
     vec2 player_dir = pos - UV;
     float player_dist = length(player_dir);

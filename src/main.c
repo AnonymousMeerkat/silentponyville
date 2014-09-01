@@ -79,7 +79,6 @@ void Game_loop() {
     NImage_record(swapfbo);
 
     glClear(GL_COLOR_BUFFER_BIT);
-    glClearColor(0.0, 0.0, 0.0, 2.0);
 
     NLevel_draw(N_levels[0]);
 

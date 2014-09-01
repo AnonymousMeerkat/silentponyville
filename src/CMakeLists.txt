@@ -1,7 +1,7 @@
 add_custom_command(
     OUTPUT rscdata.c
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/../rscdata.json
-    COMMAND ${EXECUTABLE_OUTPUT_PATH}/databuilder${CMAKE_EXECUTABLE_SUFFIX} ${CMAKE_CURRENT_SOURCE_DIR}/../rscdata.json rscdata.c
+    COMMAND ${EXECUTABLE_OUTPUT_PATH}/nightmaretool${CMAKE_EXECUTABLE_SUFFIX} databuilder ${CMAKE_CURRENT_SOURCE_DIR}/../rscdata.json rscdata.c
 )
 
 set(SOURCES

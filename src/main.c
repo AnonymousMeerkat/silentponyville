@@ -30,7 +30,8 @@ bool Game_init() {
     N_player->z = N_levels[0]->default_layer;
     groan = Groaner_new();
     groan->pos.x = 400;
-    groan->pos.y = 141;
+    //groan->pos.y = 141;
+    groan->pos.y = 148;
     groan->z = N_levels[0]->default_layer;
     level = N_images[SP_IMAGE_FAKELEVEL];
     //fog = N_images[SP_IMAGE_FAKEFOG];
@@ -83,6 +84,7 @@ void Game_loop() {
     NLevel_draw(N_levels[0]);
 
     // Draw fog
+#if 0
     uint move_x_amt = (N_currtime/40)%1024u;
     uint move_y_amt = (-N_currtime/100)%1024u;
     NShader_run(N_shaders[3]);
@@ -91,6 +93,7 @@ void Game_loop() {
     NIMAGE_DRAW(fog, .size = Npos2i(1024, 1024), .pos = Npos2i(move_x_amt - 1024, move_y_amt - 1024));
     NIMAGE_DRAW(fog, .size = Npos2i(1024, 1024), .pos = Npos2i(move_x_amt, move_y_amt - 1024));
     NShader_stop();
+#endif
 
     NImage_stoprecord();
 

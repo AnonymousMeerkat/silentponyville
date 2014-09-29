@@ -4,6 +4,7 @@ var liheight;
 var liamt;
 
 var menu_center = true;
+var animate = true;
 
 function show_el(element) {
     element.removeClass("hidden");
@@ -32,16 +33,36 @@ function center_el(element) {
     centerh_el(element);
 }
 
-function animate_menu() {
+function position_menu() {
     var $gamemenu = $("#gamemenu");
     var $gamemenu_li = $("#gamemenu li");
     var li_amt = $gamemenu_li.length;
     var spacing = width / li_amt;
 
-    /*for (var i = 0; i < li_amt; i++) {
+    centerw_el($gamemenu);
+
+    $("#logo").css("opacity", "0");
+
+    for (var i = 0; i < li_amt; i++) {
         var $this = $($gamemenu_li[i]);
-        $this.width(spacing);
-    }*/
+        var offset = $this.offset();
+        $this.css({
+            "top": 0,
+            "left": i * spacing
+        });
+    }
+
+    $gamemenu.css({
+        "left": "auto",
+        "top": "auto"
+    });
+}
+
+function animate_menu() {
+    var $gamemenu = $("#gamemenu");
+    var $gamemenu_li = $("#gamemenu li");
+    var li_amt = $gamemenu_li.length;
+    var spacing = width / li_amt;
 
     centerw_el($gamemenu);
 
@@ -59,11 +80,20 @@ function animate_menu() {
             duration: 700
         });
     }
+
+    $gamemenu.css({
+        "left": "auto",
+        "top": "auto"
+    });
 }
 
 function show_page(name) {
     if (menu_center) {
-        animate_menu();
+        if (animate) {
+            animate_menu();
+        } else {
+            position_menu();
+        }
         menu_center = false;
     }
 
@@ -101,11 +131,25 @@ function show_post(name) {
             duration: 500
         });
         var twopars = $this.parent().parent().parent();
-        if ($this.offset().top + oldheight + window.screenY > height) {
+        if ($this.offset().top + oldheight > height) {
             console.log("At ze buttom");
+            var diff = 0;
             twopars.scroll();
+
+            var calc = twopars.scrollTop() + $this.offset().top + oldheight - height + 26;
+            console.log(calc);
+            console.log(oldheight);
+            console.log(twopars.scrollTop());
+            console.log($this.offset().top);
+
+            var calc2 = $this.parent().position().top + twopars.scrollTop();
+
+            console.log(calc2);
+            if (calc > calc2) {
+                calc = calc2;
+            }
             twopars.animate({
-                scrollTop: twopars.scrollTop() + $this.offset().top + oldheight + window.screenY - height + 26
+                scrollTop: calc
             }, 500);
             //setTimeout(function() {twopars.scrollTop(twopars.scrollTop() + oldheight)}, 600);
         }
@@ -185,4 +229,21 @@ $(document).ready(function() {
         centerw_el($logo);
         show_el($content);
     });
+
+    if (window.location.hash) {
+        var hash = window.location.hash;
+        var page = $("#content > .page").index($(hash));
+        if (page >= 0) {
+            animate = false;
+            show_page(hash);
+        } else {
+            hash = hash.substring(1);
+            page = $("[perma=" + hash + "]");
+            if (page) {
+                animate = false;
+                show_page("#blog");
+                show_post("#" + $(page.children(".blog_body")[0]).attr("id"));
+            }
+        }
+    }
 });

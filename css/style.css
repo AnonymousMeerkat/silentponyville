@@ -1,6 +1,8 @@
 body {
+    font-family: 'Open Sans', sans-serif;
     background-color: #050505;
     color: #ddd;
+    line-height: 1.5;
 }
 
 .hidden {
@@ -100,8 +102,31 @@ hr {
     width: 128px;
     height: 128px;
     line-height: 0;
-    margin: 64px;
-    padding: 0;
+    padding: 64px;
+    margin: 0;
     border: 0;
     border-image-width: 0;
+}
+
+dt {
+    padding-left: 1em;
+    padding-bottom: 1em;
+    padding-top: 1em;
+}
+
+dd {
+    padding-left: 3em;
+    font-size: 85%;
+}
+
+ul, ol {
+    padding-top: .5em;
+    list-style-type: circle;
+    padding-bottom: .5em;
+    padding-left: 1em;
+}
+
+li {
+    padding-top: .5em;
+    padding-bottom: .5em;
 }

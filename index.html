@@ -52,7 +52,7 @@ title: Index
 
         <div id="download" class="page">
             <div class="innerpage">
-                <p>This game is currently in development stages, and at this stage, we cannot offer any download links.</p>
+                <p>This game is currently in development, and at this stage, we cannot offer any download links.</p>
                 <br /><br />
                 <p>Don't worry though!
                 <br /><br />
@@ -70,47 +70,7 @@ title: Index
                     {% else %}
                         <hr />
                     {% endif %}
-                    <div class="blog_post" id="bp_{{ blog_id }}">
-                        <div class="blog_title" id="bt_{{ blog_id }}">{{ post.title }}</div>
-                        <div class="blog_body" id="bb_{{ blog_id }}">{{ post.content }}</div>
-                    </div>
-                    {% capture blog_id %}{{ blog_id | plus: 1 }}{% endcapture %}
-                    {% if first_post %}
-                        {% assign first_post = false %}
-                    {% else %}
-                        <hr />
-                    {% endif %}
-                    <div class="blog_post" id="bp_{{ blog_id }}">
-                        <div class="blog_title" id="bt_{{ blog_id }}">{{ post.title }}</div>
-                        <div class="blog_body" id="bb_{{ blog_id }}">{{ post.content }}</div>
-                    </div>
-                    {% capture blog_id %}{{ blog_id | plus: 1 }}{% endcapture %}
-                    {% if first_post %}
-                        {% assign first_post = false %}
-                    {% else %}
-                        <hr />
-                    {% endif %}
-                    <div class="blog_post" id="bp_{{ blog_id }}">
-                        <div class="blog_title" id="bt_{{ blog_id }}">{{ post.title }}</div>
-                        <div class="blog_body" id="bb_{{ blog_id }}">{{ post.content }}</div>
-                    </div>
-                    {% capture blog_id %}{{ blog_id | plus: 1 }}{% endcapture %}
-                    {% if first_post %}
-                        {% assign first_post = false %}
-                    {% else %}
-                        <hr />
-                    {% endif %}
-                    <div class="blog_post" id="bp_{{ blog_id }}">
-                        <div class="blog_title" id="bt_{{ blog_id }}">{{ post.title }}</div>
-                        <div class="blog_body" id="bb_{{ blog_id }}">{{ post.content }}</div>
-                    </div>
-                    {% capture blog_id %}{{ blog_id | plus: 1 }}{% endcapture %}
-                    {% if first_post %}
-                        {% assign first_post = false %}
-                    {% else %}
-                        <hr />
-                    {% endif %}
-                    <div class="blog_post" id="bp_{{ blog_id }}">
+                    <div class="blog_post" id="bp_{{ blog_id }}" perma="{{ post.url | remove: "/" | remove: ".html" }}">
                         <div class="blog_title" id="bt_{{ blog_id }}">{{ post.title }}</div>
                         <div class="blog_body" id="bb_{{ blog_id }}">{{ post.content }}</div>
                     </div>

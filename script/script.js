@@ -41,7 +41,7 @@ function position_menu() {
 
     centerw_el($gamemenu);
 
-    $("#logo").css("opacity", "0");
+    $("#logo").remove();
 
     for (var i = 0; i < li_amt; i++) {
         var $this = $($gamemenu_li[i]);
@@ -69,6 +69,8 @@ function animate_menu() {
     $("#logo").transition({
         opacity: 0,
         duration: 500
+    }, function() {
+        $(this).remove();
     });
 
     for (var i = 0; i < li_amt; i++) {

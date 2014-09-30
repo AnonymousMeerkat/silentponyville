@@ -41,8 +41,6 @@ function position_menu() {
 
     centerw_el($gamemenu);
 
-    $("#logo").remove();
-
     for (var i = 0; i < li_amt; i++) {
         var $this = $($gamemenu_li[i]);
         var offset = $this.offset();
@@ -56,6 +54,10 @@ function position_menu() {
         "left": "auto",
         "top": "auto"
     });
+
+    $("#logo").remove();
+
+    show_el($("#content"));
 }
 
 function animate_menu() {

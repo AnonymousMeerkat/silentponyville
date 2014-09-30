@@ -222,9 +222,9 @@ $(document).ready(function() {
 
     var $logo = $("#logo");
     $logo.load(function() {
-        $logo.width($logo.width() * .5);
+        $logo.width($logo.width() * .7);
         $logo.offset({
-            top: 20 + (($("#gamemenu").offset().top / 2 - $logo.height()) / 2)
+            top: 70 + (($("#gamemenu").offset().top / 2 - $logo.height()) / 2)
         });
         centerw_el($logo);
         show_el($content);

@@ -111,6 +111,7 @@ function show_page(name) {
             $this.attr("sp_transit", "true");
             setTimeout(function() {if ($this.attr("sp_transit") !== "false") {hide_el($this)}}, 1000);
             $this.css("z-index", 0);
+            $("li[page=" + $this.attr("id") + "]").removeClass("active");
         }
     });
 
@@ -123,6 +124,7 @@ function show_page(name) {
         })
         $this.css("z-index", 1000);
         $this.attr("sp_transit", "false");
+        $("li[page=" + $this.attr("id") + "]").addClass("active");
     }
 }
 
@@ -228,7 +230,7 @@ $(document).ready(function() {
     $logo.load(function() {
         $logo.width($logo.width() * .7);
         $logo.offset({
-            top: 70 + (($("#gamemenu").offset().top / 2 - $logo.height()) / 2)
+            top: (($("#gamemenu li:nth-child(1)").offset().top - $logo.height()) / 2)
         });
         centerw_el($logo);
         show_el($content);

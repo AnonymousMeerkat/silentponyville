@@ -81,11 +81,11 @@ void Game_loop() {
 
     glClear(GL_COLOR_BUFFER_BIT);
 
-    NLevel_draw(N_levels[0]);
+    NLevel_draw(N_levels[0], fog);
 
     // Draw fog
 #if 0
-    uint move_x_amt = (N_currtime/40)%1024u;
+    uint move_x_amt = ((N_currtime/40)-(int)N_levels[0]->camera)%1024u;
     uint move_y_amt = (-N_currtime/100)%1024u;
     NShader_run(N_shaders[3]);
     NIMAGE_DRAW(fog, .size = Npos2i(1024, 1024), .pos = Npos2i(move_x_amt, move_y_amt));

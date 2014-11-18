@@ -1,12 +1,6 @@
-VERT_HEAD;
-
-uniform vec2 SP_pos;
-
-varying vec2 UV;
-varying vec2 pos;
+VERT_HEAD
 
 void main() {
     Nsetpos();
     NsetUV();
-    pos = SP_pos;
 }

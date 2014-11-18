@@ -1,6 +1,4 @@
-VERT_HEAD;
-
-varying vec2 UV;
+VERT_HEAD
 
 void main() {
     Nsetpos();

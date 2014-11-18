@@ -1,4 +1,5 @@
-varying vec2 UV;
+FRAG_HEAD
+
 uniform sampler2D samp2D;
 
 void main() {

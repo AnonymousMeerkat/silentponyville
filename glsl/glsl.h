@@ -1,16 +1,23 @@
-#define VERT_HEAD attribute vec3 Nvertex_pos;\
-                  attribute vec2 Nvertex_UV
+/*#define VERT_HEAD attribute vec3 Nvertex_pos;\
+                  attribute vec2 Nvertex_UV*/
+#define VERT_HEAD out vec2 UV;\
+                  out float UVz;
+#define FRAG_HEAD in vec2 UV;\
+                  in float UVz;
+
+in vec3 Nvertex_pos;
+in vec2 Nvertex_UV;
 
 uniform mat4 N_MVP;
 uniform bool N_UV_flip;
 uniform float N_UV_z;
 uniform float N_alpha;
 uniform bool N_3D;
-uniform int N_time;
-uniform int N_rand;
+uniform uint N_time;
+uniform float N_rand;
 
-#ifdef GL_ES
-#define modi(x, y) (x - (int(x / y) * y))
+#ifndef EXT_gpu_shader4
+#define modi(x, y) ((x) - (((x) / (y)) * (y)))
 #else
 #define modi(x, y) mod(x, y)
 #endif
@@ -27,5 +34,5 @@ uniform int N_rand;
 }
 #define NsetUV3() {\
     NsetUV();\
-    UV.z = N_UV_z;\
+    UVz = N_UV_z;\
 }

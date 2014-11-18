@@ -1,8 +1,9 @@
-varying vec2 UV;
-varying vec2 pos;
+FRAG_HEAD
+
+uniform vec2 SP_pos;
 uniform sampler2D texsampler;
 
-const float sample_dist = 0.2;
+const float sample_dist = 0.5;
 const float sample_strength = 1.5;
 
 #ifndef GL_ES
@@ -12,8 +13,8 @@ const float samples[12] =
 
 float rand(vec2 n)
 {
-  return 0.5 + 0.5 *
-     fract(sin(dot(vec2(mod(float(N_rand), n.x), mod(float(N_rand), n.y)), vec2(12.9898, 78.233)))* (43758.5453));
+  return mod(N_rand, 0.5 + 0.5 *
+     fract(sin(dot(n, vec2(12.9898, 78.233)))* (43758.5453)));
 }
 
 void rad_blur() {
@@ -34,22 +35,24 @@ void rad_blur() {
     samples[i] = 0.01;
 #endif
 
-    vec2 player_dir = pos - UV;
+    /*vec2 player_dir = SP_pos - UV;
     float player_dist = length(player_dir);
-    player_dir /= player_dist;
+    player_dir /= player_dist;*/
 
     vec4 sum = gl_FragColor;
 
     for (int i = 0; i < 12; i++) {
-      sum += texture2D(texsampler, UV + player_dir * samples[i] * sample_dist);
+      sum += texture2D(texsampler, UV + (SP_pos - UV) * samples[i] * sample_dist);
     }
 
     sum *= 1./13.;
 
-    float t = player_dist * sample_strength;
+    gl_FragColor = sum;
+
+    /*float t = player_dist * sample_strength;
     t = clamp(t, 0., 1.);
 
-    gl_FragColor = mix(gl_FragColor, sum, t);
+    gl_FragColor = mix(gl_FragColor, sum, t);*/
 }
 
 void vignette() {
@@ -71,7 +74,7 @@ void film_noise() {
 
     gl_FragColor += grain;
 
-    gl_FragColor -= rand(vec2(N_rand, N_time)) * 0.1;
+    gl_FragColor -= rand(vec2(N_rand)) * 0.05;
 }
 
 void main() {

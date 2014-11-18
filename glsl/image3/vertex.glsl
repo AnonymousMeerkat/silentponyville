@@ -1,9 +1,8 @@
-VERT_HEAD;
-
-varying vec3 UV;
+VERT_HEAD
 
 void main() {
     Nsetpos();
     NsetUV3();
-    UV.z = (float(modi(N_time, 12000))) / 12000.0;
+    uint myint = modi(N_time, 12000u);
+    UVz = (float(myint)) / 12000.0;
 }

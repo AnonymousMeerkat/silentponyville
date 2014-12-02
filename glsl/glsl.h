@@ -2,8 +2,18 @@
                   attribute vec2 Nvertex_UV*/
 #define VERT_HEAD out vec2 UV;\
                   out float UVz;
+#ifdef GL_ES
+#define FRAG_HEAD in vec2 UV;\
+                  in float UVz;\
+                  out vec4 FragColor;
+#define gl_FragColor FragColor
+#define texture2D texture
+#define texture3D texture
+#else
 #define FRAG_HEAD in vec2 UV;\
                   in float UVz;
+#endif
+
 
 in vec3 Nvertex_pos;
 in vec2 Nvertex_UV;

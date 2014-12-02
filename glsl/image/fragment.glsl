@@ -3,6 +3,8 @@ FRAG_HEAD
 uniform sampler2D samp2D;
 
 void main() {
-    gl_FragColor = texture2D(samp2D, UV);
-    gl_FragColor.a *= N_alpha;
+    vec4 color = texture2D(samp2D, UV);
+    color.a *= N_alpha;
+
+    gl_FragColor = color;
 }

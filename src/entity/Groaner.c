@@ -16,7 +16,7 @@ struct Groaner_data {
 
 NEntity* Groaner_new() {
     NEntity_info Groaner_info = {
-        Npos2i(50, 50), N_spritesheets[SP_SPRITESHEET_GROANER], .015, .03
+        NVec2i(50, 50), N_spritesheets[SP_SPRITESHEET_GROANER], .015, .03
     };
     NEntity* groaner = NEntity_new(Groaner_info);
     struct Groaner_data* data = malloc(sizeof(struct Groaner_data));
@@ -52,9 +52,9 @@ void Groaner_update(NEntity* groaner) {
     }
 
     bool facing = NEntity_facing(groaner, N_player);
-    NPosi distance = NEntity_distance(groaner, N_player);
+    int distance = NEntity_distance(groaner, N_player);
 
-    NPosi min_distance = 100;
+    int min_distance = 100;
     if (data->seen_player) {
         min_distance = 180;
     } else if (N_currtime - data->alerted_time < 5000) {

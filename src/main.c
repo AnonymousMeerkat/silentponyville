@@ -5,7 +5,6 @@
 #include <NRsc.h>
 #include <NShader.h>
 #include <wrap/gl.h>
-#include <GLKit/GLKMath.h>
 
 #include "Globals.h"
 #include "entity/Player.h"
@@ -107,7 +106,7 @@ void Game_loop() {
     glClearColor(0.0, 0.0, 0.0, 2.0);
 
     NShader_run(N_shaders[1]);
-    GLKVector2 pos_screen = GLKVector2Divide(GLKVector2Subtract(NEntity_center(N_player), Npos2f(N_levels[0]->camera, 0)), Npos2i_2f(N_game_size));
+    NVec2f_t pos_screen = NVec2f_div(NVec2f_sub(NEntity_center(N_player), NVec2f(N_levels[0]->camera, 0)), NVec2i_2f(N_game_size));
     pos_screen.y = 1-pos_screen.y;
     NShader_set_vec2(N_shaders[1], "SP_pos", pos_screen);
     NIMAGE_DRAW(swapfbo);

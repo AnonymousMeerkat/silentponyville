@@ -5,7 +5,7 @@
 
 NEntity* Player_new() {
     NEntity_info Player_info = {
-        Npos2i(50, 50), N_spritesheets[SP_SPRITESHEET_PLAYER], .027, .04
+        NVec2i(50, 50), N_spritesheets[SP_SPRITESHEET_PLAYER], .027, .04
     };
     return NEntity_new(Player_info);
 }
